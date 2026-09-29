@@ -180,6 +180,8 @@ static const struct config_setting config_settings[] =
 		"Quit this many seconds after the window opens; 0 never." },
 	{ "debug.hidden_window", _config_boolean, "false", "HALO_HIDDEN_WINDOW", _environment_set_is_true, _platform_desktop,
 		"Keep the window hidden (and never fullscreen)." },
+	{ "debug.terminal_output", _config_boolean, "true", "HALO_TERMINAL_OUTPUT", _environment_value, _platform_desktop,
+		"Show transient game messages at the bottom of the screen." },
 	{ "debug.null_renderer", _config_boolean, "false", "HALO_NULL_RENDERER", _environment_set_is_true, _platform_all,
 		"Run without a window, drawing nothing." },
 	{ "debug.gl_debug", _config_boolean, "false", "HALO_GL_DEBUG", _environment_set_is_true, _platform_all,

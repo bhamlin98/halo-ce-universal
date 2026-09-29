@@ -61,6 +61,7 @@ symbols in this file:
 #include "render.h"
 #ifdef HALO_LINUX
 #include "main/main.h"
+#include "../../port/linux/src/port_config.h"
 #endif
 #include "draw_string.h"
 #include "byte_swapping.h"
@@ -127,6 +128,9 @@ struct terminal_globals terminal_globals = {0};
 void terminal_initialize(
 	void)
 {
+#ifdef HALO_LINUX
+	terminal_render_enable = config_boolean("debug.terminal_output");
+#endif
 	terminal_globals.output_lines = data_new("terminal output", OUTPUT_MAXIMUM_LINES, sizeof(struct output_line_datum));
 	terminal_globals.initialized = TRUE;
 	data_make_valid(terminal_globals.output_lines);

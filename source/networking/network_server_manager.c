@@ -2163,7 +2163,8 @@ boolean server_needs_more_teams(
 {
 	boolean needs_more_teams = FALSE;
 
-	if (server->game.variant.universal_variant.teams)
+	if (server->game.variant.universal_variant.teams &&
+		!(network_game_is_splitscreen_local() && server->game.player_count == 1))
 	{
 		short player_count_by_team[NUMBER_OF_MULTIPLAYER_TEAMS] = { 0, 0 };
 		long player_index;
@@ -3179,7 +3180,8 @@ static boolean network_game_server_setup_game_from_playlist(
 		ustrncpy(server->game.name, machine_name, NETWORK_GAME_NAME_LENGTH - 1);
 		server->game.name[NETWORK_GAME_NAME_LENGTH - 1] = L'\0';
 		server->game.map.version = 0;
-		server->game.minimum_players = 2;
+		server->game.minimum_players =
+			network_game_should_accept_remote_connections() ? 2 : 1;
 		server->game.maximum_players = MAXIMUM_NETWORK_PLAYER_COUNT;
 
 		if (server->game.variant.universal_variant.teams)
